@@ -24,16 +24,16 @@ resource "aws_instance" "WebServer" {
   
   provisioner "remote-exec" {
     inline = [
-      "sudo yum install -y epel-release && sudo yum -y install ansible", 
-      "sudo cd /tmp && curl -O https://raw.githubusercontent.com/pcareyrh/hashicorpDemo/main/apache_install.yml",
-      "sudo ansible-playbook /tmp/apache_install.yml" 
+      "curl -O https://raw.githubusercontent.com/pcareyrh/hashicorpDemo/main/apache_install.yml",
+      "sudo yum install -y epel-release && sudo yum -y install ansible",
+      "sudo ansible-playbook /home/centos/apache_install.yml" 
     ]
     
     connection {
       type     = "ssh"
       host     = self.public_ip
       user     = "centos"
-      private_key = "${file("~/.ssh/id_rsa")}"
+      private_key = file("~/.ssh/id_rsa")
       timeout  = "3m"
     }
   }
@@ -57,7 +57,7 @@ resource "aws_security_group" "allow_web" {
 
   ingress {
     description = "allow web inbound"
-    from_port   = 80
+    from_port   = 0
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
@@ -66,7 +66,7 @@ resource "aws_security_group" "allow_web" {
   ingress {
     description = "allow secure web inbound"
     from_port   = 0
-    to_port     = 8080
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
