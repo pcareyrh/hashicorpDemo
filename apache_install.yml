@@ -1,0 +1,59 @@
+---
+- name: Apache server installed
+  hosts: all
+
+  tasks:
+  - name: latest Apache version installed
+    yum:
+      name: httpd
+      state: latest
+
+  - name: latest firewalld version installed
+    yum:
+      name: firewalld
+      state: latest
+
+  - name: firewalld enabled and running
+    service:
+      name: firewalld
+      enabled: true
+      state: started
+
+  - name: firewalld permits http service
+    firewalld:
+      service: http
+      permanent: true
+      state: enabled
+      immediate: yes
+
+  - name: firewalld permits https service
+    firewalld:
+      service: https
+      permanent: true
+      state: enabled
+      immediate: yes
+
+  - name: Apache enabled and running
+    service:
+      name: httpd
+      enabled: true
+      state: started
+
+  - name: Download index.html
+    get_url:
+      url: https://raw.githubusercontent.com/pcareyrh/workshop-examples/webdev/rhel/apache/roles/role_webcontent/templates/prod_index.html.j2
+      dest: /var/www/html/index.html
+      mode: '0640'
+
+  - name: Download httpd.conf
+    get_url:
+      url: https://raw.githubusercontent.com/pcareyrh/workshop-examples/webdev/rhel/apache/roles/role_webcontent/files/httpd.conf
+      dest: /etc/httpd/conf/httpd.conf
+      mode: '0640'
+  
+  - name: Restart service httpd, in all cases
+    ansible.builtin.service:
+      name: httpd
+      state: restarted
+  
+
