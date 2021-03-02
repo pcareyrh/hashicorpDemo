@@ -18,14 +18,11 @@ resource "aws_instance" "WebServer" {
   key_name = "xpskeypair"
   security_groups = [ "default", "allow_web", "allow_ssh" ]
 
-  provisioner "file" {
-    source      = "apache_install.yml"
-    destination = "/tmp/apache_install.yml"
-  }
-
   provisioner "remote-exec" {
     inline = [
-      "sudo yum install -y epel-release ansible", "sudo cd /tmp && sudo ansible-playbook /tmp/apache_install.yml" ]
+      "sudo yum install -y epel-release ansible", 
+      "sudo cd /tmp && curl -O https://raw.githubusercontent.com/pcareyrh/hashicorpDemo/main/apache_install.yml",
+      "sudo ansible-playbook /tmp/apache_install.yml" ]
   }
   tags = {
     Name = "WebSever"
