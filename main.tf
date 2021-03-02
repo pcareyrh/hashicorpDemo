@@ -25,7 +25,7 @@ resource "aws_instance" "WebServer" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo ansible-playbook /tmp/apache_install.yml" ]
+      "sudo yum install -y epel-release ansible", "sudo cd /tmp && sudo ansible-playbook /tmp/apache_install.yml" ]
   }
   tags = {
     Name = "WebSever"
