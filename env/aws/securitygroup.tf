@@ -1,7 +1,6 @@
 resource "aws_security_group" "allow_web" {
   name        = "allow_web"
   description = "Allow web inbound"
-  #depends_on = [ module.vpc.id ]
   vpc_id      = module.vpc.vpc_id
 
 
@@ -64,7 +63,7 @@ resource "aws_security_group" "allow_vault" {
   name        = "allow_vault"
   description = "Allow vault group"
   vpc_id      = module.vpc.vpc_id
-  
+
   ingress {
     description = "allow vault inbound"
     from_port   = 8200
