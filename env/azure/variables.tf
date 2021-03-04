@@ -1,4 +1,22 @@
-variable "location" {}
+variable "location" {
+  type = string
+  default = "australiasoutheast"
+}
+
+variable "servercount" {
+  type = number
+}
+variable "admin_username" {
+    type = string
+    description = "Administrator user name for virtual machine"
+    default = "patrick"
+}
+
+variable "admin_password" {
+    type = string
+    description = "Password must meet Azure complexity requirements"
+    default = "Patrick01"
+}
 
 variable "prefix" {
   type    = string
@@ -9,7 +27,7 @@ variable "tags" {
   type = map
 
   default = {
-    Environment = "Terraform GS"
+    Env = "dev"
     Dept        = "Engineering"
   }
 }

@@ -12,67 +12,39 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "myTFResourceGroup"
-  location = "australiasoutheast"
-}
-
-# Create a virtual network
-resource "azurerm_virtual_network" "vnet" {
-    name                = "myTFVnet"
-    address_space       = ["10.0.0.0/16"]
-    location            = "australiasoutheast"
-    resource_group_name = azurerm_resource_group.rg.name
-}
-
-variable "admin_username" {
-    type = string
-    description = "Administrator user name for virtual machine"
-    default = "patrick"
-}
-
-variable "admin_password" {
-    type = string
-    description = "Password must meet Azure complexity requirements"
-    default = "Patrick01"
-}
-
-# Create subnet
-resource "azurerm_subnet" "subnet" {
-  name                 = "myTFSubnet"
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = ["10.0.1.0/24"]
+resource "azurerm_resource_group" "DemoRG" {
+  name     = "DemoRG"
+  location = var.location
 }
 
 # Create public IP
-resource "azurerm_public_ip" "publicip" {
-  name                = "myTFPublicIP"
-  location            = "australiasoutheast"
-  resource_group_name = azurerm_resource_group.rg.name
-  allocation_method   = "Static"
-}
+#resource "azurerm_public_ip" "publicip" {
+#  name                = "myTFPublicIP"
+#  location            = "australiasoutheast"
+#  resource_group_name = azurerm_resource_group.rg.name
+#  allocation_method   = "Static"
+#}
 
 
 # Create Network Security Group and rule
-resource "azurerm_network_security_group" "nsg" {
-  name                = "myTFNSG"
-  location            = "australiasoutheast"
-  resource_group_name = azurerm_resource_group.rg.name
+#resource "azurerm_network_security_group" "nsg" {
+#  name                = "myTFNSG"
+#  location            = "australiasoutheast"
+#  resource_group_name = azurerm_resource_group.rg.name
 
-  security_rule {
-    name                       = "SSH"
-    priority                   = 1001
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-}
-
+#  security_rule {
+#    name                       = "SSH"
+#    priority                   = 1001
+#    direction                  = "Inbound"
+#    access                     = "Allow"
+#    protocol                   = "Tcp"
+#    source_port_range          = "*"
+#    destination_port_range     = "22"
+#    source_address_prefix      = "*"
+#    destination_address_prefix = "*"
+#  }
+#}
+/*
 # Create network interface
 resource "azurerm_network_interface" "nic" {
   name                      = "myNIC"
@@ -119,9 +91,9 @@ resource "azurerm_virtual_machine" "vm" {
     disable_password_authentication = false
   }
 }
-
-data "azurerm_public_ip" "ip" {
-  name                = azurerm_public_ip.publicip.name
-  resource_group_name = azurerm_virtual_machine.vm.resource_group_name
-  depends_on          = [azurerm_virtual_machine.vm]
-}
+*/
+#data "azurerm_public_ip" "ip" {
+#  name                = azurerm_public_ip.publicip.name
+#  resource_group_name = azurerm_virtual_machine.vm.resource_group_name
+#  depends_on          = [azurerm_virtual_machine.vm]
+#}
