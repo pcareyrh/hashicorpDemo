@@ -3,7 +3,7 @@ module "linuxservers" {
   resource_group_name = azurerm_resource_group.DemoRG.name
   vm_os_simple        = "CentOS"
   storage_account_type = "Standard_LRS"
-  nb_instances        = var.servercount
+  nb_instances        = var.instance_count
   remote_port         = "22"
 #  public_ip_dns       = ["linsimplevmips"] // change to a unique name per datacenter region
   vnet_subnet_id      = module.vnet.vnet_subnets[0]
