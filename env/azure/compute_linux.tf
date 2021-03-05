@@ -27,21 +27,5 @@ module "linuxservers" {
   vm_size                       = "Standard_D4s_v3"
 */
 
-  provisioner "remote-exec" {
-    inline = [
-      "curl -O https://raw.githubusercontent.com/pcareyrh/hashicorpDemo/main/apache_install.yml",
-      "sudo yum install -y epel-release && sudo yum -y install ansible",
-      "sudo ansible-playbook /home/centos/apache_install.yml" 
-    ]
-    
-    connection {
-      type     = "ssh"
-      host     = self.public_ip
-      user     = "centos"
-      private_key = file("~/.ssh/id_rsa")
-      timeout  = "3m"
-    }
-  }
-    
   depends_on = [azurerm_resource_group.DemoRG]
 }
