@@ -5,6 +5,7 @@ module "linuxservers" {
   storage_account_type = "Standard_LRS"
   nb_instances        = var.instance_count
   remote_port         = "22"
+  custom_data         = file("./scripts/cloud-init.yml")
 #  public_ip_dns       = ["linsimplevmips"] // change to a unique name per datacenter region
   vnet_subnet_id      = module.vnet.vnet_subnets[0]
   #.vnet_subnets[0]
