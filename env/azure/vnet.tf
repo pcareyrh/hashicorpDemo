@@ -11,8 +11,7 @@ module "vnet" {
 
   tags = {
     env = "dev"
-    costcenter  = "it"
-  }
+    }
 
   depends_on = [azurerm_resource_group.DemoRG]
 }

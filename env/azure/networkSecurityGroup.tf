@@ -1,7 +1,7 @@
 module "network-security-group" {
   source                = "Azure/network-security-group/azurerm"
   resource_group_name   = azurerm_resource_group.DemoRG.name
-  security_group_name   = "nsg"
+  security_group_name   = "NetSecurityGroup"
   source_address_prefix = ["*"]
   predefined_rules = [
     {

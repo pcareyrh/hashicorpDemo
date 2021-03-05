@@ -11,6 +11,7 @@ provider "aws" {
   profile = "default"
   region  = "ap-southeast-2"
 }
+
 /*
 resource "aws_instance" "WebServer" {
   ami           = "ami-0bac9d0b7acaea5d4" #CentOS Stream 8 / ap-southeast-2

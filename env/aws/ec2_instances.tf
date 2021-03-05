@@ -10,10 +10,12 @@ module "ec2_instances" {
   key_name               = "xpskeypair"
   vpc_security_group_ids = [aws_security_group.allow_ssh.id, aws_security_group.allow_web.id]
   subnet_id              = module.vpc.public_subnets[0]
-  associate_public_ip_address = false
+  associate_public_ip_address = true
+  user_data              = file("./scripts/cloud-init.yml")
 
   tags = {
     Demo   = "true"
     Env = "dev"
   }
+
 }

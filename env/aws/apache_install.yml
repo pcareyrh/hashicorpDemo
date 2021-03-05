@@ -26,13 +26,6 @@
       state: enabled
       immediate: yes
 
-  - name: firewalld permits https service
-    firewalld:
-      service: https
-      permanent: true
-      state: enabled
-      immediate: yes
-
   - name: Apache enabled and running
     service:
       name: httpd
