@@ -1,0 +1,9 @@
+packages:
+  - epel-release
+  - wget
+  
+runcmd:
+  - mkdir /run/mydir
+  - [yum, install, -y, ansible ]
+  - [ wget, "https://raw.githubusercontent.com/pcareyrh/hashicorpDemo/main/env/aws/apache_install.yml", -O, /run/mydir/apache_install.yml ]
+  - sudo ansible-playbook /run/mydir/apache_install.yml

@@ -8,3 +8,8 @@ variable "instance_count" {
   type = number
 }
 
+variable "instance_name" {
+  description = "instance name/s"
+  type = string
+  default = "DemoVM"
+}

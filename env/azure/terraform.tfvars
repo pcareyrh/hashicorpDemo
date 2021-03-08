@@ -1,2 +1,2 @@
-location       = "australiasoutheast"
+//location       = "australiasoutheast"
 //prefix         = "tf"
