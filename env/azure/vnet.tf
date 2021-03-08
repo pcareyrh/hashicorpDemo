@@ -1,4 +1,4 @@
-module "vnet" {
+/*module "vnet" {
   source              = "Azure/vnet/azurerm"
   resource_group_name = azurerm_resource_group.DemoRG.name
   address_space       = ["10.0.0.0/16"]

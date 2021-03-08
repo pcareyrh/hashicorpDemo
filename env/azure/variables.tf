@@ -11,6 +11,11 @@ variable "instance_count" {
   type = number
 }
 
+variable "instance_name" {
+  type = string
+  default = "DemoVM"
+}
+
 variable "admin_username" {
   description = "The admin username of the VM that will be deployed."
   type        = string
@@ -21,10 +26,4 @@ variable "vm_hostname" {
   description = "local name of the Virtual Machine."
   type        = string
   default     = "DemoVM"
-}
-
-variable "enable_ssh_key" {
-  type        = bool
-  description = "(Optional) Enable ssh key authentication in Linux virtual Machine."
-  default     = true
 }
